@@ -80,11 +80,18 @@
     }
 
     private sealed class RegisterModel
-    {
+    {   
+        [Required(ErrorMessage = "please enter your email")]
+        [EmailAddress(ErrorMessage = "please enter a valid email address.")]
         public string Email { get; set; } = "";
 
         public string Password { get; set; } = "";
 
         public string ConfirmPassword { get; set; } = "";
+
+
+
+
+
     }
 }
