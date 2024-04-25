@@ -58,11 +58,21 @@
 
     public async Task RegisterUser(EditContext editContext)
     {
-        var user = Activator.CreateInstance<User>(); ;
-        await UserStore.SetUserNameAsync(user, Model.Email, CancellationToken.None);
-        var emailStore = (IUserEmailStore<User>)UserStore;
-        await emailStore.SetEmailAsync(user, Model.Email, CancellationToken.None);
+        var user = new User
+            {
+                UserName = Model.Email,
+                Email = Model.Email,
+                FirstName = Model.FirstName,
+                LastName = Model.LastName,
+                Address = Model.Address,
+                City = Model.City,
+                PostCode = Model.Postcode,
+
+            };
+
         var result = await UserManager.CreateAsync(user, Model.Password);
+        await UserManager.AddToRoleAsync(user, "Customer");
+
 
         if (!result.Succeeded)
         {
@@ -85,9 +95,32 @@
         [EmailAddress(ErrorMessage = "please enter a valid email address.")]
         public string Email { get; set; } = "";
 
+
+        [Required(ErrorMessage = "please enter a password")]
+        [DataType(DataType.Password)]
         public string Password { get; set; } = "";
 
+
+
+        [Required(ErrorMessage = "please enter your password")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The password and confirmation do not match.")]
         public string ConfirmPassword { get; set; } = "";
+
+        [Required(ErrorMessage = "please enter your first name")]
+        public string FirstName { get; set; } = "";
+
+        [Required(ErrorMessage = "please enter your last name")]
+        public string LastName { get; set; } = "";
+
+        [Required(ErrorMessage = "please enter your address")]
+        public string Address { get; set; } = "";
+
+        [Required(ErrorMessage = "please enter your city")]
+        public string City { get; set; } = "";
+
+        [Required(ErrorMessage = "please enter your postcode")]
+        public string Postcode { get; set; } = "";
 
 
 
