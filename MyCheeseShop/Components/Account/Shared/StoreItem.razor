@@ -1,0 +1,71 @@
+﻿
+@inject ShoppingCart ShoppingCart
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using MyCheeseShop.Model
+
+
+
+
+
+<h3>StoreItem</h3>
+
+
+
+
+<EditForm Model="quantity" OnSubmit="AddToCart">
+
+
+
+
+
+</EditForm>
+
+
+
+
+<div class="card h-100">
+    
+        <div class="card">
+            <div class="card-body">
+                <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top p-1" alt="@Cheese.Name" onerror="this.onerror = null; this.src='/img/no_cheese.png'">
+                <h5>
+                    <span class="badge bg-primary">@Cheese.Type</span>
+                    <span class="badge bg-danger">@Cheese.Strength</span>
+                </h5>
+                
+                <h5 class="card-title">@Cheese.Name</h5>
+                <p class="card-text">@Cheese.Description</p>
+                <a href="#" class="btn btn-success" data-mdb-ripple-init>Purchase</a>
+            </div>
+        </div>
+  
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@code {
+
+    [Parameter]
+    public Cheese Cheese { get; set; }
+
+    private int quantity = 1;
+
+    public async Task AddToCart()
+    { }
+}
+
+

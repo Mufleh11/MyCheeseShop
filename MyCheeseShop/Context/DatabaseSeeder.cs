@@ -56,8 +56,8 @@ namespace MyCheeseShop.Context
         {
             return
             [
-                new Cheese { Name = "Gouda Gold", Type = "Semi-Hard", Description = "A smooth and creamy cheese originating from the Netherlands, known for its slightly nutty flavor and golden hue.", Strength = "Medium", Price = 8.99m, ImageUrl="gouda.png" },
-                new Cheese { Name = "Camembert Classic", Type = "Soft-Ripened", Description = "A quintessential French cheese with a velvety rind and creamy interior, boasting rich, earthy flavors with hints of mushroom.", Strength = "Mild", Price = 10.49m, ImageUrl="camembert.png" },
+                new Cheese { Name = "Gouda Gold", Type = "Semi-Hard", Description = "Dutch cheese, nutty, smooth, golden.", Strength = "Medium", Price = 8.99m, ImageUrl="gouda.png" },
+                new Cheese { Name = "Camembert Classic", Type = "Soft-Ripened", Description = "French, velvety and creamy interior, boasting hints of mushroom.", Strength = "Mild", Price = 10.49m, ImageUrl="camembert.png" },
                 new Cheese { Name = "Cheddar Supreme", Type = "Hard", Description = "An aged English cheese with a sharp and tangy taste, characterized by its crumbly texture and deep orange color.", Strength = "Strong", Price = 7.99m, ImageUrl="cheddar.png" },
                 new Cheese { Name = "Brie Royale", Type = "Soft-Ripened", Description = "A luxurious French cheese with a buttery texture and delicate, creamy taste, perfect for pairing with fruits and crackers.", Strength = "Mild", Price = 11.99m, ImageUrl="brie.png" },
                 new Cheese { Name = "Blue Vein Delight", Type = "Blue", Description = "A pungent and flavorful cheese with distinctive blue veins running throughout, offering a bold and tangy taste experience.", Strength = "Strong", Price = 9.99m, ImageUrl="blue.png" },
@@ -73,7 +73,7 @@ namespace MyCheeseShop.Context
                 new Cheese { Name = "Ricotta Riches", Type = "Fresh", Description = "An Italian whey cheese with a creamy texture and slightly sweet flavor, commonly used in desserts, pastries, or as a filling in pasta dishes.", Strength = "Mild", Price = 5.99m, ImageUrl="ricotta.png" },
                 new Cheese { Name = "Manchego Majesty", Type = "Hard", Description = "A Spanish cheese made from sheep's milk, featuring a firm texture and nutty flavor with hints of caramel, perfect for pairing with fruits or cured meats.", Strength = "Medium", Price = 11.49m, ImageUrl="manchego.png"  },
                 new Cheese { Name = "Goat's Glee", Type = "Soft", Description = "A creamy and tangy cheese made from goat's milk, offering a distinctive flavor profile and smooth texture, ideal for spreading on crackers or toast.", Strength = "Mild", Price = 9.99m, ImageUrl="goat.png" },
-                new Cheese { Name = "Emmental Elegance", Type = "Semi-Hard", Description = "A Swiss cheese with a mild and nutty taste, featuring large irregular holes and a smooth, buttery texture, perfect for fondue or sandwiches.", Strength = "Medium", Price = 10.99m, ImageUrl="emmental.png" },
+                new Cheese { Name = "Emmental Elegance", Type = "Semi-Hard", Description = "A Swiss cheese with a mild and nutty taste, featuring large irregular holes and a smooth, buttery texture, perfect for fondue or sandwiches.", Strength = "Medium", Price = 10.99m, ImageUrl="unicorn.png" },
                 new Cheese { Name = "Pecorino Passion", Type = "Hard", Description = "An Italian cheese made from sheep's milk, boasting a sharp and salty flavor, often grated over pasta or enjoyed with honey and nuts.", Strength = "Strong", Price = 13.99m, ImageUrl="pecorino.png" },
                 new Cheese { Name = "Monterey Jack", Type = "Semi-Soft", Description = "A versatile American cheese with a mild and buttery taste, great for melting on nachos, sandwiches, or adding to omelets for extra creaminess.", Strength = "Medium", Price = 7.49m, ImageUrl="monterey.png" }
             ];

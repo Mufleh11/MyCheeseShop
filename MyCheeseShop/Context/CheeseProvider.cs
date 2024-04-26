@@ -1,4 +1,7 @@
-﻿namespace MyCheeseShop.Context
+﻿using Microsoft.EntityFrameworkCore;
+using MyCheeseShop.Model;
+
+namespace MyCheeseShop.Context
 {
     public class CheeseProvider
     {
@@ -10,7 +13,22 @@
         }
     
     
-    
+       public async Task<List<Cheese>> GetAllCheesesAsync()
+        {
+            return await _context.Cheeses.OrderBy(cheese => cheese.Name).ToListAsync();
+
+        }
+
+
+        public  Cheese? GetCheeseById(int id) 
+        {
+            return _context.Cheeses.Find(id);
+
+        }
+
+
+
+
     
     }
 
