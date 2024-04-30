@@ -1,0 +1,67 @@
+﻿
+@page "/cart"
+@inject ShoppingCart ShoppingCart
+@inject ProtectedSessionStorage ProtectedSessionStorage
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using MyCheeseShop.Components.Account.Shared
+@using MyCheeseShop.Model
+@inject NavigationManager NavigationManager
+@inject CartSummary CartSummary
+
+<PageTitle>Cart</PageTitle>
+
+<a @onclick = "GoToCheckout" class="btn btn-outline-primary"> Checkout</a>
+
+@code {
+    protected override void OnInitialized()
+    {
+        ShoppingCart.OnCartUpdated += StateHasChanged;
+    }
+
+    private void GoToStore()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void GoToCheckout()
+    {
+        NavigationManager.NavigateTo("/checkout");
+    }
+}
+
+
+        
+    <table>
+        <tbody>
+            @foreach (var item in ShoppingCart.GetItems())
+            {
+                <div class="card mb-2" style="max-width: 1080px;">
+                    <div class="row g-0">
+                        <div class="col-md-3">
+                            <img src="/img/cheeses/@item.Cheese.ImageUrl" class="img-fluid rounded-start" />
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card-body">
+                                <h4 class="card-title">@item.Cheese.Name</h4>
+                                <div>
+                                    <p class="card-text"><strong>Price: </strong> @item.Cheese.Price.ToString("C")</p>
+                                    <p class="card-text"><strong>Quantity: </strong>@(item.Quantity * 100)g</p>
+                                    <p class="card-text"><strong>Total: </strong>@item.Total.ToString("C")</p>
+                                    @if (IsEditable)
+                                    {
+                <td scope="auto">
+                    <button class="btn btn-outline-success mt-1 mt-md-0" @onclick="() => IncreaseQuantity(item)">Increase</button>
+                    <button class="btn btn-outline-primary mt-1 mt-md-0" @onclick="() => DecreaseQuantity(item)">Decrease</button>
+                    <button class="btn btn-outline-danger mt-1 mt-md-0" @onclick="() => RemoveItem(item)">Delete</button>
+                </td>
+                                    }
+
+    </div>
+                           </div>
+                      </div>
+                 </div>
+            </div>
+            }
+    </tbody>
+</table>
+       
