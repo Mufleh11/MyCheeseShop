@@ -1,10 +1,11 @@
 ﻿@page "/"
 @inject NavigationManager NavigationManager
 @using MyCheeseShop.Components.Account.Shared
+@using MyCheeseShop.Components.Shared
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
 @inject CheeseProvider CheeseProvider
-
+@inject ShoppingCart ShoppingCart
 <PageTitle>Home</PageTitle>
 
 <h1>Mufleh's Cheese Shop</h1>
@@ -19,6 +20,9 @@ else if (!cheeses.Any())
 }
 
 
+<div class="d-flex justify-content-end mt-2 mt-md-0">
+    <a @onclick="GoToCart" class="btn btn-outline-dark"> Cart </a>
+</div>
 
 
 <div class="card h-100">
@@ -38,14 +42,6 @@ else if (!cheeses.Any())
 
 
 
-
-
-
-<div class="d-flex justify-content-between">
-    <div>
-        <button @onclick="GoToCart" class="btn btn-outline-primary">To Cart </button>
-    </div>
-    </div>
 
 
 

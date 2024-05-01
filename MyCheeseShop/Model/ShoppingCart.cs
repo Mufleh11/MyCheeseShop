@@ -37,6 +37,46 @@ namespace MyCheeseShop.Model
 
 
         }
+        public decimal Total()
+        {
+            return _items.Sum(item => item.Cheese.Price * item.Quantity);
+        }
+
+        public void SetItems(IEnumerable<CartItem> items)
+        {
+            
+            _items = items.ToList();
+            OnCartUpdated?.Invoke();
+        }
+
+        public void RemoveItem(Cheese cheese)
+        {
+            var item = _items.RemoveAll(item => item.Cheese.Id == cheese.Id);
+            OnCartUpdated?.Invoke();
+
+        }
+
+        public void DecreaseItem(Cheese cheese, int quantity)
+        {
+            var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
+            if (item is not null)
+            {
+                item.Quantity = quantity;
+                if (item.Quantity <= 0)
+                    _items.Remove(item);
+            }
+            OnCartUpdated?.Invoke();
+
+
+        }
+
+        public int Count()
+        {
+            return _items.Count;
+        }
+
+
+
         public IEnumerable<CartItem> GetItems()
         {
             return _items;
