@@ -29,6 +29,9 @@ builder.Services.AddDbContext<DatabaseContext>();
 
 builder.Services.AddScoped<CheeseProvider>();
 
+builder.Services.AddScoped<OrderProvider>();
+
+builder.Services.AddScoped<UserProvider>();
 
 builder.Services.AddIdentityCore<User>()
    .AddRoles<IdentityRole>()

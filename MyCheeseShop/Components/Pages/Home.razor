@@ -20,22 +20,22 @@ else if (!cheeses.Any())
 }
 
 
-<div class="d-flex justify-content-end mt-2 mt-md-0">
-    <a @onclick="GoToCart" class="btn btn-outline-dark"> Cart </a>
+<div class="d-flex justify-content-end mt-2 mt-md-3">
+    <a @onclick="GoToCart" class="btn btn-warning"> Cart </a>
 </div>
 
 
-<div class="card h-100">
-<div class ="row">
-@foreach (var cheese in cheeses)
+@foreach (var cheese in FilteredCheeses)
 {
-    <div class="col-md-4">
-        <StoreItem Cheese =" cheese" />
-
+    <div class="col">
+        <StoreItem Cheese="cheese" />
     </div>
 }
-</div>
-</div>
+@if (!FilteredCheeses.Any())
+{
+    <p> No cheeses found</p>
+}
+
 
 
 

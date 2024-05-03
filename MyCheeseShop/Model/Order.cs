@@ -8,10 +8,11 @@
         public DateTime Created { get; set; }
         public OrderStatus Status { get; set; }
 
+        private User user;
     }
 
-
-
-
     
+
+
+
 }

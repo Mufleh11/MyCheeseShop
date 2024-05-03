@@ -88,6 +88,17 @@ namespace MyCheeseShop.Model
            
             var item = _items.FirstOrDefault(item => item.Cheese.Id == cheese.Id);
             return item?.Quantity ?? 0;
+     
+        
         }
+      
+
+        public void Clear ()
+        {
+            _items.Clear();
+            OnCartUpdated?.Invoke();
+        }
+
     }
+
 }
