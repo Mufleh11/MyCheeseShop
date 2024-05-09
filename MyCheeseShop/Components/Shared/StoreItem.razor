@@ -18,48 +18,45 @@
 
 
 
-<div class="card-">
-    <div class="card ">
-        <div class="card-body d-flex flex-column">
-
-            <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top p-1" alt="@Cheese.Name" onerror="this.onerror = null; this.src='/img/no_cheese.png'">
-            <h3>
-                <span class="badge bg-primary">@Cheese.Type</span>
-                <span class="badge bg-danger">@Cheese.Strength</span>
-            </h3>
-            <span class="badge bg-danger">@Cheese.Price</span>
-            <h5 class="card-title">@Cheese.Name</h5>
-            <p class="card-text">@Cheese.Description</p>
+<div class="card h-100">
+    <div class="card-body d-flex flex-column">
+                    <img src="/img/cheeses/@Cheese.ImageUrl" class="card-img-top p-1" alt="@Cheese.Name" onerror="this.onerror = null; this.src='/img/no_cheese.png'">
+                    <h3>
+                        <span class="badge bg-primary">@Cheese.Type</span>
+                        <span class="badge bg-danger">@Cheese.Strength</span>
+                    </h3>
+                    <span class="badge bg-danger">@Cheese.Price</span>
+                    <h5 class="card-title">@Cheese.Name</h5>
+                    <p class="card-text">@Cheese.Description</p>
 
 
-            <EditForm Model="quantity" OnSubmit="AddToCart">
-                <InputSelect class="form-select w-100" @bind-Value="quantity" required>
-                    <option value="1">100g</option>
-                    <option value="2">200g</option>
-                    <option value="3">300g</option>
-                    <option value="4">400g</option>
-                    <option value="5">500g</option>
-                    <option value="6">900kg is how much I weigh</option>
+                    <EditForm Model="quantity" OnSubmit="AddToCart">
+                        <InputSelect class="form-select w-100" @bind-Value="quantity" required>
+                            <option value="1">100g</option>
+                            <option value="2">200g</option>
+                            <option value="3">300g</option>
+                            <option value="4">400g</option>
+                            <option value="5">500g</option>
+                            <option value="6">900kg is how much I weigh</option>
 
-                </InputSelect>
+                        </InputSelect>
 
 
-                <button class="btn btn-success position-relative w-100">
-                    Add to cart
-                    @if (ShoppingCart.GetQuantity(Cheese) > 0)
-                    {
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            @(ShoppingCart.GetQuantity(Cheese)*100)g
-                            <span class="visually-hidden">@Cheese.Name in shopping cart</span>
-                        </span>
-                    }
-                </button>
-            </EditForm>
+                        <button class="btn btn-success position-relative w-100">
+                            Add to cart
+                            @if (ShoppingCart.GetQuantity(Cheese) > 0)
+                            {
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    @(ShoppingCart.GetQuantity(Cheese) * 100)g
+                                    <span class="visually-hidden">@Cheese.Name in shopping cart</span>
+                                </span>
+                            }
+                        </button>
+                    </EditForm>
 
-        </div>
-    </div>
-</div>
-
+                </div>
+            </div>
+       
 
 
 

@@ -1,5 +1,6 @@
 ﻿@page "/checkout"
 @using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MyCheeseShop.Context
 @using MyCheeseShop.Model
@@ -21,7 +22,15 @@
     private PaymentDetails paymentDetails;
     private EditContext editContext;
     private bool isPaying;
+    protected override async Task OnInitializedAsync()
+    {
+        paymentDetails = new PaymentDetails();
+        editContext = new EditContext(paymentDetails);
 
+        var authState = await AuthenticationStateProvid.GetAuthenticationStateAsync();
+        var username = authState!.User!.Identity!.Name!;
+        user = UserProvider.GetUserByUsername(username)!;
+    }
     private async Task MakePayment()
     {
         await StimulatePayment();
