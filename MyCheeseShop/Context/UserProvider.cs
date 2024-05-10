@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using MyCheeseShop.Context;
 using MyCheeseShop.Model;
-using DatabaseContext dbcontext
+
 
 
 namespace MyCheeseShop.Context
@@ -16,9 +17,15 @@ namespace MyCheeseShop.Context
             _context = context;
             _userManager = userManager;
         }
+
+
+
         public User? GetUserByUsername(string? username)
         {
-            return _context.User.FirstOrDefault(user => user.UserName == username);
+            return _context.Users.FirstOrDefault(user => user.UserName == username);
         }
+
     }
+  
+
 }

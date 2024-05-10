@@ -10,14 +10,52 @@
 @inject ShoppingCart ShoppingCart
 @inject OrderProvider OrderProvider
 @inject ProtectedSessionStorage ProtectedSessionStore
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserProvider UserProvider
 
 
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+                  @if (IsEditable)
+                {
+                    <th scope="col">Actions</th>
+                } 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ShoppingCart.GetItems())
+            {
+                <tr>
+                    <td scope="col">@item.Cheese.Name</td>
+                    <td scope="col">@item.Cheese.Price.ToString("C")</td>
+                    <td scope="col">@((item.Quantity * 100))g</td>
+                    <td scope="col">@item.Total.ToString("C")</td>
 
+
+                  @*   <td scope="col">
+                        <button class="btn btn-warning mt-1 mt-md-1" @onclick="() => IncreaseQuantity(item)">+</button>
+                        <button class="btn btn-warning mt-1 mt-md-1" @onclick="() => DecreaseQuantity(item)">-</button>
+                        <button class="btn btn-warning mt-1 mt-md-1" @onclick="() => RemoveItem(item)">x</button>
+
+                    </td> *@
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
 
 
 
 @code {
-
+    public bool IsEditable { get; set; } = false;
     private User user;
     private PaymentDetails paymentDetails;
     private EditContext editContext;
@@ -27,7 +65,7 @@
         paymentDetails = new PaymentDetails();
         editContext = new EditContext(paymentDetails);
 
-        var authState = await AuthenticationStateProvid.GetAuthenticationStateAsync();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var username = authState!.User!.Identity!.Name!;
         user = UserProvider.GetUserByUsername(username)!;
     }

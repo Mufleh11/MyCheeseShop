@@ -1,52 +1,48 @@
 ﻿
-@inject ShoppingCart ShoppingCart
-@inject ProtectedSessionStorage ProtectedSessionStorage
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MyCheeseShop.Components.Shared
 @using MyCheeseShop.Model
+@inject ShoppingCart ShoppingCart
 @inject NavigationManager NavigationManager
-@inject CartSummary CartSummary
 
-<body>
-    @if (ShoppingCart.Count() == 0)
-    {
-        <h3>Shopping Cart</h3>
-        <p>Your cart is empty</p>
-        <div>
-            <button @onclick="GoToStore" class="btn btn-outline-dark"> Back to cheeses</button>
-        </div>
-    }
-    else
-    {
-        <div class="d-flex justify-content-between">
-            <div>
-                <h3>Shopping Cart</h3>
-            </div>
-            <div>
-                <a @onclick="GoToCheckout" class="btn btn-outline-dark">  Checkout </a>
-            </div>
-        </div>
 
-        <CartSummary IsEditable="true" />
-    }
-</body>
-@code
+
+@if (ShoppingCart.Count() == 0)
 {
+    <h3>Shopping Cart</h3>
+    <p>Your cart is empty</p>
+    <div>
+        <button @onclick="GoToStore" class="btn btn-outline-primary">Back to cheeses</button>
+    </div>
+}
+else
+{
+    <div class="d-flex justify-content-between">
+        <div>
+            <h3>Shopping Cart</h3>
+        </div>
+        <div>
+            <a @onclick="GoToCheckout" class="btn btn-outline-primary">Checkout</a>
+        </div>
+    </div>
+
+    @* <CartSummary IsEditable="true"/> *@
+}
+
+@code {
     protected override void OnInitialized()
     {
         ShoppingCart.OnCartUpdated += StateHasChanged;
     }
 
-    protected void GoToStore()
+    private void GoToStore()
     {
         NavigationManager.NavigateTo("/");
     }
 
-    protected void GoToCheckout()
+    private void GoToCheckout()
     {
         NavigationManager.NavigateTo("/checkout");
     }
 }
-
 
    
