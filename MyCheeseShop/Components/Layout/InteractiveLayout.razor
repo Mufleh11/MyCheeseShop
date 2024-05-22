@@ -18,35 +18,25 @@
 @code {
     protected async override Task OnAfterRenderAsync(bool firstrender)
     {
-        if(firstrender)
+        if (firstrender)
         {
             var result = await ProtectedSessionStorage.GetAsync<List<CartItem>>("cart");
             var items = result.Success ? result.Value : null;
-            if(items is not null && items.Any())
+            if (items is not null && items.Any())
             {
-                items.ForEach(item =>
-                {
-                    var exisiting = DatabaseContext.Cheeses.Local.FirstOrDefault(cheese => cheese.Id == item.Cheese.Id);
-                    if (exisiting == null)
-                    {
-                        DatabaseContext.Cheeses.Attach(item.Cheese);
-                    }
-
-                });
+                items.ForEach(async item => item.Cheese = await DatabaseContext.Cheeses.FindAsync(item.Cheese.Id));
                 ShoppingCart.SetItems(items);
-
             }
         }
-       
-        
+
+
     }
-    
-    
 
 
 
 
-   
+
+
+
 
 }
-    

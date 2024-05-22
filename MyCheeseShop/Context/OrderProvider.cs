@@ -1,16 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyCheeseShop.Model;
 
-
-
-
 namespace MyCheeseShop.Context
 {
     public class OrderProvider
     {
-
-        
-
         private readonly DatabaseContext _context;
 
         public OrderProvider(DatabaseContext context)

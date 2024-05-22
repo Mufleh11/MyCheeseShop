@@ -32,10 +32,10 @@
                 <th scope="col">Quantity</th>
                 <th scope="col">Total</th>
                 <th scope="col"></th>
-                  @if (IsEditable)
+             @*      @if (IsEditable)
                 {
                     <th scope="col">Actions</th>
-                } 
+                 *@} 
             </tr>
         </thead>
         <tbody>
@@ -65,18 +65,44 @@
 
 <EditForm EditContext="editContext" OnValidSubmit="MakePayment">
     <DataAnnotationsValidator />
-</EditForm>
+
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">Customer Information</h4>
+                        <div class="form-group mb-3 text-center">
+                            <label class="form-label">Name</label>
+                            <input class="form-control text-center" value="@GetFormattedName(user)" disabled />
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <label class="form-label">Address</label>
+                            <input class="form-control text-center" value="@GetFormattedAddress(user)" disabled />
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <label class="form-label">Email</label>
+                            <input class="form-control text-center" value="@user.Email" disabled />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="col-lg-6 col-12 mt-lg-1 mt-2">
             <div class="card h-100">
                 <div class="card-body bg-light">
                     <h4 class="card-title">Payment</h4>
                     <div class="form-group mb-1">
                         <label class="form-label">Name on card</label>
-                        <InputText class="form-control" placeholder="GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
+                        <InputText class="form-control" placeholder="@GetFormattedName(user)" @bind-Value="paymentDetails.NameOnCard" />
                     </div>
                     <div class="form-group mb-1">
                         <label class="form-label">Card number</label>
-                        <InputText class="form-control" placeholder="" @bind-Value="paymentDetails.CardNumber" />
+                        <InputText class="form-control" placeholder="0000-0000-0000-0000" @bind-Value="paymentDetails.CardNumber" />
                     </div>
                     <div class="form-group mb-1">
                         <label class="form-label">Expiry Date</label>
@@ -87,11 +113,19 @@
                         <InputText class="form-control" placeholder="123" @bind-Value="paymentDetails.SecurityCode" />
                     </div>
                 </div>
-            </div>
+        <button type="submit" class="btn btn-success d-flex align-items-center">
+                <span>Purchase</span>
+            @if(isPaying)
+                {
+                    <span>One Second</span>
+                }
+          </button>
+        
+    </div>   
 </div>
 
 
-
+</EditForm>
 
 
 
@@ -102,11 +136,12 @@
 
 
 @code {
-    public bool IsEditable { get; set; } = false;
+    // public bool IsEditable { get; set; } = false;
     private User user;
     private PaymentDetails paymentDetails;
     private EditContext editContext;
     private bool isPaying;
+
     protected override async Task OnInitializedAsync()
     {
         paymentDetails = new PaymentDetails();
@@ -122,16 +157,18 @@
 
         await OrderProvider.CreateOrder(user, ShoppingCart.GetItems());
         ShoppingCart.Clear();
-        NavigationManager.NavigateTo("/thankyou");
+        NavigationManager.NavigateTo("/thanks");
     }
 
     private async Task StimulatePayment()
     {
         isPaying = true;
         StateHasChanged();
+        await Task.Delay(1500);
+        isPaying = false;
+        StateHasChanged();
 
     }
-
 
     private sealed class PaymentDetails
     {
@@ -146,6 +183,15 @@
 
         [Required]
         public string SecurityCode { get; set; }
+    }
+
+    private string GetFormattedName(User user)
+    {
+        return $"{user.FirstName} {user.LastName}";
+    }
+    private string GetFormattedAddress(User user)
+    {
+        return $"{user.Address}{Environment.NewLine}{user.City}{Environment.NewLine}{user.PostCode}";
     }
 
 }
