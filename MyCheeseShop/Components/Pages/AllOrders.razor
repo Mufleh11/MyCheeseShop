@@ -1,8 +1,22 @@
 ﻿@page "/all-orders"
 @using Microsoft.AspNetCore.Authorization
 @using MyCheeseShop.Context
+@using MyCheeseShop.Model
 @attribute [Authorize(Roles = "Admin")]
 @inject OrderProvider OrderProvider
+@inject CartItem CartItem
+
+ <div class="row">
+
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <Cart />
+    </div>
+
+</div>
+
+
+
 
 @code {
 
