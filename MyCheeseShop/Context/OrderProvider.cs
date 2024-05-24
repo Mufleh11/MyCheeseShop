@@ -31,7 +31,18 @@ namespace MyCheeseShop.Context
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
         }
-     
+        public async Task<List<Order>?> GetOrdersAsync(User? user)
+        {
+            if (user == null) return null;
+
+            return await _context.Orders
+                .Where(order => order.User.UserName == user.UserName)
+                .Include(order => order.Items)
+                .ThenInclude(item => item.Cheese)
+                .OrderByDescending(order => order.Created)
+                .ToListAsync();
+        }
+
     }
   
 }

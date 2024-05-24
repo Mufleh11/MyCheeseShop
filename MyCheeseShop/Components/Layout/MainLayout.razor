@@ -8,12 +8,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
-                </li>
-                
-            </ul>
+         
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
                 <AuthorizeView>
                     <Authorized>
@@ -36,27 +31,34 @@
                     </NotAuthorized>
                 </AuthorizeView>
             </ul>
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            <ul class="nav navbar-nav ml-auto w-100 ">
                 <AuthorizeView>
-                    <Authorized>
-                        <AuthorizeView Roles="Admin" Context="innerContext">
-                            <span class="navbar-text me-1">Admin</span>
-
+                    
+                    @* <Authorized>   *@
+                        <AuthorizeView Context="innerContext">
+                       <li class="nav-item">
+                            <NavLink class="nav-link" href="/my-orders" Match="NavLinkMatch.All">My Orders</NavLink>
+                       </li>
                         </AuthorizeView>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" </ul>
-                        <li class="nav-item">
-                            <NavLink class="dropdown-item" href="/all-orders" Match="NavLinkMatch.All">All Orders</NavLink>
-                        </li>
-                    </Authorized>
-                    <NotAuthorized>
+                        <AuthorizeView Roles="Admin" Context="innerContext">
+                            <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="nabarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+                            Admin
+                            </a>
+                     <ul class="dropdown-menu" aria-labedelledby=""></ul>
+                    <div class="dropdown-divider"></div>
                         <li class="nav-item">
                             <NavLink class="dropdown-item" href="/add-cheese" Match="NavLinkMatch.All">Add Cheese</NavLink>
                         </li>
                         <li class="nav-item">
                             <NavLink class="dropdown-item" href="edit-cheese" Match="NavLinkMatch.All">Edit Cheese</NavLink>
                         </li>
-                    </NotAuthorized>
+                      
+                   </li>
+                    
                 </AuthorizeView>
+                 @* </Authorized> *@
+                </AuthorizeView>  
             </ul>
         </div>
     </div>
